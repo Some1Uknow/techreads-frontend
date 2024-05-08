@@ -8,7 +8,7 @@ import ProfileCard from "../components/ProfileCard";
 export default function ProfilePage() {
   const { user, setUser } = useContext(UserContext);
 
-  const fetchUserProfile = async () => {
+  const fetchUserProfile = () => {
     fetch(`${import.meta.env.VITE_BASE_URL}/profile`, {
       credentials: "include",
     }).then((response) => {
@@ -17,10 +17,6 @@ export default function ProfilePage() {
       });
     });
   };
-
-  useEffect(() => {
-    fetchUserProfile();
-  }, []);
 
   const username = user?.username;
   const params = useParams();
@@ -59,6 +55,7 @@ export default function ProfilePage() {
   };
 
   useEffect(() => {
+    fetchUserProfile();
     fetchUserData();
   }, []);
 
