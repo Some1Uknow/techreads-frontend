@@ -1,13 +1,13 @@
 import { MdComputer } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useState } from "react";
-import axios from "axios";
 
 export default function RegisterForm() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [redirect, setredirect] = useState(false);
 
   const handleInput = (e) => {
     const { name, value } = e.target;
@@ -23,18 +23,30 @@ export default function RegisterForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = { username, email, password };
-
+  
     try {
-      const res = await axios.post(`${import.meta.env.VITE_BASE_URL}/register`, formData);
-      if (res.status == 200) {
-        console.log("Registration success");
+      const res = await fetch(`${import.meta.env.VITE_BASE_URL}/register`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+  
+      if (res.ok) {
+        console.log(res);
+        alert("Registration success");
+        setredirect(true);
       } else {
-        console.log("Registration failed...");
+        alert("Registration failed, same username or email exists");
       }
     } catch (error) {
       console.log("Error registering", error);
     }
   };
+
+  if (redirect) return <Navigate to="/login" />;
+  
 
   return (
     <div className="w-screen h-screen flex flex-row justify-between bg-gray-200">
