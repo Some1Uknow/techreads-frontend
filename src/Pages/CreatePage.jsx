@@ -129,7 +129,7 @@ export default function CreatePage() {
   };
 
   const openai = new OpenAI({
-    apiKey: import.meta.env["VITE_OPENAI_API_KEY"],
+    apiKey: import.meta.env.VITE_OPENAI_API_KEY,
     dangerouslyAllowBrowser: true,
   });
 
