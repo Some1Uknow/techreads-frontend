@@ -2,8 +2,9 @@ import ReactQuill from "react-quill";
 import { useEffect, useState, useContext } from "react";
 import "react-quill/dist/quill.bubble.css";
 import { Navigate, useParams } from "react-router-dom";
-
 import { UserContext } from "../Provider";
+import { MdStar } from "react-icons/md";
+import Popup from "../components/PopUp";
 
 export default function CreatePage() {
   const { user, setUser } = useContext(UserContext);
@@ -82,6 +83,7 @@ export default function CreatePage() {
       setIsEdit(true);
       fetchBlogData();
     }
+    setShowPopup(true);
   }, []);
 
   const handleSubmit = async (e) => {
@@ -118,12 +120,17 @@ export default function CreatePage() {
     if (res.status === 200) seteditRedirect(true);
   };
 
- 
   if (submitRedirect) return <Navigate to="/" />;
   if (editRedirect) return <Navigate to={`/profile/${user.id}`} />;
 
+  const [showPopup, setShowPopup] = useState(false);
+
+  const closePopup = () => {
+    setShowPopup(false);
+  };
+
   return (
-    <div className="flex justify-center h-max w-screen bg-zinc-700 text-white">
+    <div className="flex justify-center min-h-screen w-screen bg-zinc-700 text-white">
       <form
         onSubmit={(e) => handleSubmit(e)}
         className="flex flex-col gap-2 mt-10 w-11/12"
@@ -141,39 +148,50 @@ export default function CreatePage() {
           type="Summary"
           className="w-full border-b input p-2 text-3xl bg-inherit font-bold outline-none"
           value={summary}
-        /><div className="flex flex-row w-full justify-center items-center py-4"><label className="w-1/4">Upload your cover image</label>
-        <input
-          onChange={(e) => setFiles(e.target.files)}
-          type="file"
-          placeholder="choose picture"
-          //  value={files}
-          className="w-3/4 border-b input p-2 text-xl bg-inherit outline-none"
-        /></div>
+        />
+        <div className="flex flex-row w-full justify-around items-center py-4">
+          <label className="w-1/4 text-2xl">Upload your cover image</label>
+          <input
+            onChange={(e) => setFiles(e.target.files)}
+            type="file"
+            placeholder="choose picture"
+            //  value={files}
+            className="w-3/4 border-b input p-2 text-xl bg-inherit outline-none"
+          />
+        </div>
         <ReactQuill
           theme="bubble"
           value={content}
           onChange={(newValue) => setContent(newValue)}
-          className="w-full text-black border mb-10"
+          className="w-full text-white border-t-0 border-l-0 border-r-0 border-b border mb-10"
           modules={modules}
           formats={formats}
+          placeholder="let your ideas out"
         />
         {isEdit ? (
           <button
-          type="button"
+            type="button"
             onClick={(e) => handleEdit(e)}
             className="bg-green-400 p-2 text-center rounded-lg text-white w-full mt-4 mb-4"
           >
             Edit Post
           </button>
         ) : (
-          <button
-            type="submit"
-            className="bg-green-400 p-4 mt-4 mb rounded-lg text-white w-full"
-          >
-            Create Post
-          </button>
+          <div className="flex flex-row gap-5 w-full justify-end">
+            {" "}
+            <button
+              type="submit"
+              className="bg-green-400 w-1/5 p-4 mt-4 mb hover:bg-green-600 rounded-lg text-white"
+            >
+              Create Post
+            </button>
+            <button className="bg-green-400 flex flex-row justify-center hover:bg-green-600 items-center p-4 mt-4 mb rounded-lg text-white w-1/5">
+              Enhance with AI! <MdStar className="text-2xl font-bold ml-2" />
+            </button>
+          </div>
         )}
       </form>
+      {showPopup && <Popup closePopup={closePopup} />}
     </div>
   );
 }
