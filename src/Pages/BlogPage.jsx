@@ -33,7 +33,7 @@ const BlogPage = () => {
 
   return (
     <div className="bg-white">
-      <div className="mx-auto p-8 w-2/3 text-black">
+      <div className="mx-auto p-8 w-3/5 text-black">
         <h1 className="text-5xl font-bold mb-4 font-NotoSans">{blog.title}</h1>
         <div className="flex flex-row gap-4">
           <p className="text-gray-600 mb-2">Blog Post By: {username}</p>

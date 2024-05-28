@@ -42,7 +42,7 @@ export default function LoginForm() {
 
   // console.log(data);
 
-  if (redirect) return <Navigate to={"/"} />;
+  if (redirect) return <Navigate to={"/blogs"} />;
 
   return (
     <div className="w-screen h-screen flex flex-row justify-between bg-gray-200">

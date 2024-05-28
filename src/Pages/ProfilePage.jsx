@@ -35,6 +35,7 @@ export default function ProfilePage() {
       const userInfo = await response.json();
       const blogInfo = await blogResponse.json();
       setUserData(userInfo.userDetails);
+      console.log(userData);
       setuserBlogs(blogInfo);
     } catch (error) {
       console.error("Error fetching user data:", error);
@@ -70,6 +71,7 @@ export default function ProfilePage() {
             dateJoined={userData.createdAt}
             numberOfblogs={userBlogs.length}
             userId={userData._id}
+            imagePath={userData.userImage}
           />
           <div className="flex flex-col w-full">
             <p className="w-full ml-7 text-3xl font-NotoSans p-2">Blog Posts</p>
@@ -88,21 +90,28 @@ export default function ProfilePage() {
                       content={post.content}
                       createdAt={post.createdAt}
                       author={post.author}
-                    />
-                    <div key={post._id} className="flex flex-row gap-2">
-                      <Link to={`/edit/${post._id}`}>
-                        <button className="bg-blue-600 p-2 rounded-lg flex flex-row items-center text-white">
-                          Edit Post <MdEdit />
-                        </button>
-                      </Link>
+                    />{" "}
+                    {user ? (
+                      <>
+                        {" "}
+                        <div key={post._id} className="flex flex-row gap-2">
+                          <Link to={`/edit/${post._id}`}>
+                            <button className="bg-blue-600 p-2 rounded-lg flex flex-row items-center text-white">
+                              Edit Post <MdEdit />
+                            </button>
+                          </Link>
 
-                      <button
-                        onClick={() => handleDelete(post._id)}
-                        className="bg-red-400 p-2 rounded-lg flex flex-row items-center text-white"
-                      >
-                        Delete Post <MdDelete />
-                      </button>
-                    </div>
+                          <button
+                            onClick={() => handleDelete(post._id)}
+                            className="bg-red-400 p-2 rounded-lg flex flex-row items-center text-white"
+                          >
+                            Delete Post <MdDelete />
+                          </button>
+                        </div>
+                      </>
+                    ) : (
+                      <></>
+                    )}
                   </div>
                 ))
               ) : (

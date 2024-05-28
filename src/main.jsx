@@ -11,6 +11,7 @@ import CreatePage from "./Pages/CreatePage.jsx";
 import BlogPage from "./Pages/BlogPage.jsx";
 import ProfilePage from "./Pages/ProfilePage.jsx";
 import EditPage from "./Pages/EditPage.jsx";
+import BlogList from "./components/BlogList.jsx";
 
 const router = createBrowserRouter([
   {
@@ -39,12 +40,16 @@ const router = createBrowserRouter([
     element: <ProfilePage />,
   },
   {
-    path: 'edit/:id',
-    element: <CreatePage/>,
+    path: "/edit/:id",
+    element: <CreatePage />,
   },
   {
     path: "/editprofile/:id",
     element: <EditPage />,
+  },
+  {
+    path: "/blogs",
+    element: <BlogList />,
   },
 ]);
 

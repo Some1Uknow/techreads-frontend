@@ -1,10 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 import { MdComputer } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { UserContext } from "../Provider";
 
 const Header = () => {
   const { user, setUser } = useContext(UserContext);
+  const [logout, setLogOut] = useState(false);
 
   const fetchUserProfile = async () => {
     fetch(`${import.meta.env.VITE_BASE_URL}/profile`, {
@@ -17,7 +18,7 @@ const Header = () => {
   };
 
   useEffect(() => {
-   fetchUserProfile();
+    fetchUserProfile();
   }, []);
 
   function logOut() {
@@ -26,17 +27,21 @@ const Header = () => {
       method: "POST",
     });
     setUser(null);
+    setLogOut(true);
   }
 
+  if (logout) return <Navigate to="/" />;
   const username = user?.username;
 
   return (
     <>
       <div className="flex flex-row items-center justify-between py-5 px-20 ">
-        <p className="flex flex-row items-center text-6xl font-bold font-Chakra text-white">
-          <MdComputer className="mr-2 text-7xl " />
-          TechReads
-        </p>
+        <Link to="/">
+          <p className="flex flex-row items-center text-6xl font-bold font-Chakra text-white">
+            <MdComputer className="mr-2 text-7xl " />
+            TechReads
+          </p>
+        </Link>
         {username ? (
           <div className="flex flex-row gap-4 ">
             <button className="text-white font-normal">
@@ -48,9 +53,13 @@ const Header = () => {
             >
               Logout
             </button>
-            <button className="hover:underline">
+            <button className="hover:underline text-white">
               {" "}
               <Link to={`/profile/${user.id}`}>{username}</Link>
+            </button>
+            <button className="hover:underline text-white bg-black p-3 rounded-lg">
+              {" "}
+              <Link to="/blogs">Blogs</Link>
             </button>
           </div>
         ) : (

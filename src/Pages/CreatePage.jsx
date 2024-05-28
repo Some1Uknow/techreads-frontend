@@ -1,7 +1,7 @@
 import ReactQuill from "react-quill";
 import { useEffect, useState, useContext } from "react";
-import "react-quill/dist/quill.snow.css";
-import { Link, Navigate, useParams } from "react-router-dom";
+import "react-quill/dist/quill.bubble.css";
+import { Navigate, useParams } from "react-router-dom";
 
 import { UserContext } from "../Provider";
 
@@ -123,34 +123,34 @@ export default function CreatePage() {
   if (editRedirect) return <Navigate to={`/profile/${user.id}`} />;
 
   return (
-    <div className="bg-gray-100 flex justify-center h-max w-screen">
+    <div className="flex justify-center h-max w-screen bg-zinc-700 text-white">
       <form
         onSubmit={(e) => handleSubmit(e)}
-        className="flex flex-col gap-2 mt-10 w-11/12 "
+        className="flex flex-col gap-2 mt-10 w-11/12"
       >
         <input
           placeholder="Title"
           type="Title"
           onChange={(e) => setTitle(e.target.value)}
-          className="bg-gray-50 w-full border input p-2 rounded-xl"
+          className="w-full border-b input p-2 text-5xl bg-inherit text-white font-bold outline-none"
           value={title}
         />
         <input
           onChange={(e) => setSummary(e.target.value)}
           placeholder="Summary"
           type="Summary"
-          className="bg-gray-50 w-full border input  p-2 rounded-xl"
+          className="w-full border-b input p-2 text-3xl bg-inherit font-bold outline-none"
           value={summary}
-        />
+        /><div className="flex flex-row w-full justify-center items-center py-4"><label className="w-1/4">Upload your cover image</label>
         <input
           onChange={(e) => setFiles(e.target.files)}
           type="file"
           placeholder="choose picture"
           //  value={files}
-          className="w-full border bg-gray-50 input  p-2 rounded-xl"
-        />
+          className="w-3/4 border-b input p-2 text-xl bg-inherit outline-none"
+        /></div>
         <ReactQuill
-          theme="snow"
+          theme="bubble"
           value={content}
           onChange={(newValue) => setContent(newValue)}
           className="w-full text-black border mb-10"
@@ -161,7 +161,7 @@ export default function CreatePage() {
           <button
           type="button"
             onClick={(e) => handleEdit(e)}
-            className=" bg-green-400 p-2 text-center rounded-lg text-white w-full mt-4 mb-4"
+            className="bg-green-400 p-2 text-center rounded-lg text-white w-full mt-4 mb-4"
           >
             Edit Post
           </button>

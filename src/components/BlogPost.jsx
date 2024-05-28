@@ -29,7 +29,7 @@ const BlogPost = ({
   const imgPath = `${import.meta.env.VITE_BASE_URL}/${imgSrc}`;
 
   return (
-    <div className="bg-white flex flex-row justify-start border-gray-200 rounded-lg mb-5">
+    <div className="bg-zinc-800 flex flex-row justify-start border-gray-200 rounded-lg mb-5">
       <div className="w-1/4 h-full">
         <img
           className="rounded-t-lg object-cover w-full h-full"
@@ -37,21 +37,21 @@ const BlogPost = ({
           alt="blog-image"
         />
       </div>
-      <div className="p-5 flex flex-col justify-start flex-grow w-2/3">
-        <h5 className="text-gray-900 font-semibold text-2xl mb-2">{title}</h5>
+      <div className="p-5 flex flex-col justify-start flex-grow w-1/2">
+        <h5 className="text-gray-100 font-semibold text-2xl mb-2">{title}</h5>
         <div className="flex flex-row gap-4 mb-3">
-          <p className="text-gray-600 text-sm font-semibold"> {username}</p>
-          <p className="text-gray-600 text-sm">
+          <p className="text-gray-200 text-sm font-semibold"> {username}</p>
+          <p className="text-gray-200 text-sm">
             {new Date(createdAt).toLocaleString()}
           </p>
         </div>
-        <div className="font-normal text-gray-700 mb-3 text-xs flex-grow overflow-hidden overflow-ellipsis">
+        <div className="font-normal text-gray-300 mb-3 text-xs flex-grow overflow-hidden overflow-ellipsis">
           <div className="overflow-ellipsis" />
           {summary}
         </div>
 
         <Link to={`/blogpost/${id}`}>
-          <button className="text-xs text-center inline-flex items-center underline">
+          <button className="text-xs text-gray-300 text-center inline-flex items-center underline">
             Read more
           </button>
         </Link>

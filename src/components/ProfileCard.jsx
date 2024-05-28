@@ -10,31 +10,40 @@ export default function ProfileCard({
   numberOfblogs,
   userId,
 }) {
+  const imgSrc = `${import.meta.env.VITE_BASE_URL}/${imagePath}`;
+
   return (
     <div className="mt-6 w-1/2">
-      <div className="mx-auto border rounded-lg shadow-lg flex flex-row gap-1 items-center">
-        <div className="border-r w-1/2 flex flex-col items-center p-4">
+      <div className="mx-auto border rounded-lg shadow-lg flex flex-col gap-1 items-center">
+        <div className=" flex flex-row justify-around w-full items-center p-4">
           <img
-            src="https://via.placeholder.com/80x80"
-            className="h-32 w-32 rounded-full mt-4"
+            src={imgSrc}
+            className="h-36 w-36 rounded-full mt-4 object-cover"
           />
-          <h1 className="text-4xl p-2 font-bold font-Chakra">{username}</h1>
+          <h1 className="text-5xl p-2 font-bold font-Chakra">{username}</h1>
         </div>
-        <div className="w-1/2 p-4">
-          <div className="mb-1 text-xl  bg-gray-200 px-2 rounded-full text-gray-700">
+        <div className="w-3/4 p-4 flex flex-col gap-2">
+          <div className="mb-1 text-2xl  bg-gray-200 p-4 rounded-full text-gray-700">
             <span className="flex flex-row items-center justify-center">
               <MdEmail /> {email}
             </span>
           </div>
-          <div className="mb-1 bg-gray-200 px-2 rounded-full text-gray-700">
-            <MdPerson /> {bio}
+          <div className="mb-1 bg-gray-200 p-4 text-2xl rounded-full text-gray-700">
+            <span className="flex flex-row items-center justify-center">
+              {" "}
+              <MdPerson /> {bio}
+            </span>
           </div>
-          <div className="mb-1 bg-gray-200 px-2 rounded-full text-gray-700">
-            <MdTimer /> Member since:{" "}
-            {new Date(dateJoined).toLocaleDateString()}
+          <div className="mb-1 bg-gray-200 p-4 text-2xl rounded-full text-gray-700">
+            <span className="flex flex-row items-center justify-center">
+              <MdTimer /> Member since:
+              {new Date(dateJoined).toLocaleDateString()}
+            </span>
           </div>
-          <div className="mb-4 bg-gray-200 px-2 rounded-full text-gray-700">
-            <MdNumbers /> Blogs Published: {numberOfblogs}
+          <div className="mb-4 bg-gray-200 p-4 text-2xl rounded-full text-gray-700">
+            <span className="flex flex-row items-center justify-center">
+              <MdNumbers /> Blogs Published: {numberOfblogs}
+            </span>
           </div>
         </div>
       </div>

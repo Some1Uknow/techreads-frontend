@@ -8,7 +8,7 @@ function EditPage() {
     username: "",
     bio: "",
     email: "",
-    profilePhoto: "",
+    profilePhoto: null,
   });
 
   useEffect(() => {
@@ -19,7 +19,7 @@ function EditPage() {
       .then((userInfo) => {
         setUserData(userInfo);
       });
-  }, [id]);
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -31,21 +31,26 @@ function EditPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    const formData = new FormData();
+    formData.set("username", userData.username);
+    formData.set("bio", userData.bio);
+    formData.set("email", userData.email);
+    formData.append("profilePhoto", userData.profilePhoto);
+    console.log(userData.profilePhoto);
+
     fetch(`${import.meta.env.VITE_BASE_URL}/profile/${id}`, {
       method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(userData),
+      body: formData,
     })
       .then((response) => response.json())
       .then((updatedUserData) => {
         setUserData(updatedUserData);
       });
-      setredirect(true);
+    setredirect(true);
   };
 
-  if (redirect) return <Navigate to={`/profile/${id}`} />
+  if (redirect) return <Navigate to={`/profile/${id}`} />;
 
   return (
     <div className="max-w-lg mx-auto mt-10 p-4 bg-white shadow-md rounded-lg">
