@@ -12,6 +12,8 @@
   "dependencies": {
     "axios": "^1.6.8",
     "framer-motion": "^11.0.25",
+    "html-to-text": "^9.0.5",
+    "openai": "^4.47.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^5.0.1",

@@ -51,7 +51,7 @@ export default function ProfileCard({
         className="border-t w-full flex flex-row p-2 items-center justify-center bg-gray-200"
         to={`/editprofile/${userId}`}
       >
-        <span className="flex flex-row items-center justify-center gap-1 text-xl">
+        <span className="flex flex-row items-center justify-center gap-1 text-black text-xl">
           <MdEdit />
           Edit Profile
         </span>

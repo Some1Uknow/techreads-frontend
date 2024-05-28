@@ -61,9 +61,9 @@ export default function ProfilePage() {
   }, []);
 
   return (
-    <div>
+    <div className="min-h-screen bg-gradient-to-tr text-white from-slate-900 to-zinc-800">
       {username ? (
-        <div className="flex flex-row w-screen p-4">
+        <div className="flex flex-row p-4">
           <ProfileCard
             username={userData.username}
             bio={userData.bio}
@@ -74,13 +74,13 @@ export default function ProfilePage() {
             imagePath={userData.userImage}
           />
           <div className="flex flex-col w-full">
-            <p className="w-full ml-7 text-3xl font-NotoSans p-2">Blog Posts</p>
+            <p className="w-max ml-7 text-3xl font-NotoSans p-2">Your Posts</p>
             <div className="flex justify-center flex-col mt-4">
               {userBlogs.length > 0 ? (
                 userBlogs.map((post) => (
                   <div
                     key={post._id}
-                    className="flex flex-col items-center ml-10 shadow-md rounded-xl p-2"
+                    className="flex flex-col items-center ml-10 bg-zinc-900 shadow-md rounded-xl p-2"
                   >
                     <BlogPost
                       id={post._id}
@@ -94,7 +94,7 @@ export default function ProfilePage() {
                     {user ? (
                       <>
                         {" "}
-                        <div key={post._id} className="flex flex-row gap-2">
+                        <div key={post._id} className="flex flex-row w-full justify-end gap-2">
                           <Link to={`/edit/${post._id}`}>
                             <button className="bg-blue-600 p-2 rounded-lg flex flex-row items-center text-white">
                               Edit Post <MdEdit />

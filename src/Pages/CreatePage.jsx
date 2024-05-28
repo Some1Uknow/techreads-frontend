@@ -5,6 +5,8 @@ import { Navigate, useParams } from "react-router-dom";
 import { UserContext } from "../Provider";
 import { MdStar } from "react-icons/md";
 import Popup from "../components/PopUp";
+import { htmlToText } from "html-to-text";
+import OpenAI from "openai";
 
 export default function CreatePage() {
   const { user, setUser } = useContext(UserContext);
@@ -57,10 +59,6 @@ export default function CreatePage() {
       });
     });
   };
-
-  useEffect(() => {
-    fetchUserProfile();
-  }, []);
 
   const fetchBlogData = async () => {
     try {
@@ -124,9 +122,39 @@ export default function CreatePage() {
   if (editRedirect) return <Navigate to={`/profile/${user.id}`} />;
 
   const [showPopup, setShowPopup] = useState(false);
+  const [loading, setloading] = useState(false);
 
   const closePopup = () => {
     setShowPopup(false);
+  };
+
+  const openai = new OpenAI({
+    apiKey: import.meta.env["VITE_OPENAI_API_KEY"],
+    dangerouslyAllowBrowser: true,
+  });
+
+  const enhanceContent = async () => {
+    try {
+      const plainText = htmlToText(content);
+      const chatCompletion = await openai.chat.completions.create({
+        messages: [
+          {
+            role: "system",
+            content:
+              "You are an AI assistant that enhances blog posts with statistics and examples. If stats and examples are not possible, elaborate the content.",
+          },
+          {
+            role: "user",
+            content: plainText,
+          },
+        ],
+        model: "gpt-3.5-turbo",
+      });
+
+      setContent(chatCompletion.choices[0].message.content);
+    } catch (error) {
+      console.error("Error enhancing content:", error);
+    }
   };
 
   return (
@@ -163,7 +191,7 @@ export default function CreatePage() {
           theme="bubble"
           value={content}
           onChange={(newValue) => setContent(newValue)}
-          className="w-full text-white border-t-0 border-l-0 border-r-0 border-b border mb-10"
+          className="w-full text-white border-t-0 border-l-0 border-r-0 border-b border text-3xl mb-10"
           modules={modules}
           formats={formats}
           placeholder="let your ideas out"
@@ -181,11 +209,15 @@ export default function CreatePage() {
             {" "}
             <button
               type="submit"
-              className="bg-green-400 w-1/5 p-4 mt-4 mb hover:bg-green-600 rounded-lg text-white"
+              className="bg-green-700 w-1/5 p-4 mt-4 mb hover:bg-green-800 rounded-lg text-white"
             >
               Create Post
             </button>
-            <button className="bg-green-400 flex flex-row justify-center hover:bg-green-600 items-center p-4 mt-4 mb rounded-lg text-white w-1/5">
+            <button
+              type="button"
+              onClick={() => enhanceContent}
+              className="bg-green-700 flex flex-row justify-center hover:bg-green-800 items-center p-4 mt-4 mb rounded-lg  text-white w-1/5"
+            >
               Enhance with AI! <MdStar className="text-2xl font-bold ml-2" />
             </button>
           </div>

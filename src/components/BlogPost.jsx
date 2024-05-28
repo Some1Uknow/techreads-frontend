@@ -29,7 +29,7 @@ const BlogPost = ({
   const imgPath = `${import.meta.env.VITE_BASE_URL}/${imgSrc}`;
 
   return (
-    <div className="bg-zinc-800 flex flex-row justify-start border-gray-200 rounded-lg mb-5">
+    <div className="bg-zinc-900 flex flex-row justify-start border-gray-200 rounded-lg mb-5">
       <div className="w-1/4 h-full">
         <img
           className="rounded-t-lg object-cover w-full h-full"

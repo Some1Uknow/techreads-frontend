@@ -47,19 +47,18 @@ const Header = () => {
             <button className="text-white font-normal">
               <Link to="/create">Create New Post</Link>
             </button>
+
+            <button className="hover:underline text-white">
+              <Link to={`/profile/${user.id}`}>{username}</Link>
+            </button>
+            <button className="hover:underline text-white bg-zinc-900 p-3 rounded-lg">
+              <Link to="/blogs">Blogs</Link>
+            </button>
             <button
-              className="bg-black p-3 rounded-lg m-0 text-white font-normal"
+              className="bg-zinc-900 p-3 rounded-lg m-0 text-white font-normal"
               onClick={() => logOut()}
             >
               Logout
-            </button>
-            <button className="hover:underline text-white">
-              {" "}
-              <Link to={`/profile/${user.id}`}>{username}</Link>
-            </button>
-            <button className="hover:underline text-white bg-black p-3 rounded-lg">
-              {" "}
-              <Link to="/blogs">Blogs</Link>
             </button>
           </div>
         ) : (
