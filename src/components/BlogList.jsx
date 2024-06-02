@@ -36,25 +36,26 @@ const BlogList = () => {
     fetchData();
   }, []);
 
-  if (user.message == "Token missing")
+  if (user.message === "Token missing")
     return (
-      <div className="h-screen w-screen flex flex-row items-center justify-center text-2xl font-Chakra"> If you want to read what other techies are saying then 
+      <div className="h-screen w-screen flex flex-col items-center justify-center text-2xl font-Chakra">
+        If you want to read what other techies are saying then
         <Link className="p-2 m-2 rounded-lg bg-green-600" to="/login">
           Login
-        </Link>{" "}
-        first{" "}
+        </Link>
+        first
       </div>
     );
 
   return (
     <>
-      <div className="text-white h-screen bg-gradient-to-tr from-slate-900 to-zinc-800">
+      <div className="text-white min-h-screen bg-gradient-to-tr from-slate-900 to-zinc-800">
         <Header />
-        <div className="px-20 h-max">
+        <div className="px-4 md:px-20 h-max">
           <h1 className="text-2xl font-bold p-5">Recent Blog Posts</h1>
-          <div className="flex flex-col">
+          <div className="flex flex-col items-center md:items-start">
             {blogPosts.map((post) => (
-              <div key={post._id} className="w-4/5">
+              <div key={post._id} className="w-full md:w-4/5 mb-4">
                 <BlogPost
                   id={post._id}
                   imgSrc={post.imagePath}
@@ -68,7 +69,7 @@ const BlogList = () => {
             ))}
           </div>
         </div>
-      </div>{" "}
+      </div>
     </>
   );
 };

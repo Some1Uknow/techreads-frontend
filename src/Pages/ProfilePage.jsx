@@ -63,7 +63,7 @@ export default function ProfilePage() {
   return (
     <div className="min-h-screen bg-gradient-to-tr text-white from-slate-900 to-zinc-800">
       {username ? (
-        <div className="flex flex-row p-4">
+        <div className="flex flex-col md:flex-row p-4">
           <ProfileCard
             username={userData.username}
             bio={userData.bio}
@@ -80,7 +80,7 @@ export default function ProfilePage() {
                 userBlogs.map((post) => (
                   <div
                     key={post._id}
-                    className="flex flex-col items-center ml-10 bg-zinc-900 shadow-md rounded-xl p-2"
+                    className="flex flex-col items-center mx-2 md:ml-10 bg-zinc-900 shadow-md rounded-xl p-2 mb-4"
                   >
                     <BlogPost
                       id={post._id}
@@ -90,28 +90,22 @@ export default function ProfilePage() {
                       content={post.content}
                       createdAt={post.createdAt}
                       author={post.author}
-                    />{" "}
+                    />
                     {user ? (
-                      <>
-                        {" "}
-                        <div key={post._id} className="flex flex-row w-full justify-end gap-2">
-                          <Link to={`/edit/${post._id}`}>
-                            <button className="bg-blue-600 p-2 rounded-lg flex flex-row items-center text-white">
-                              Edit Post <MdEdit />
-                            </button>
-                          </Link>
-
-                          <button
-                            onClick={() => handleDelete(post._id)}
-                            className="bg-red-400 p-2 rounded-lg flex flex-row items-center text-white"
-                          >
-                            Delete Post <MdDelete />
+                      <div className="flex flex-row w-full justify-end gap-2 mt-2">
+                        <Link to={`/edit/${post._id}`}>
+                          <button className="bg-blue-600 p-2 rounded-lg flex flex-row items-center text-white">
+                            Edit Post <MdEdit className="ml-1" />
                           </button>
-                        </div>
-                      </>
-                    ) : (
-                      <></>
-                    )}
+                        </Link>
+                        <button
+                          onClick={() => handleDelete(post._id)}
+                          className="bg-red-400 p-2 rounded-lg flex flex-row items-center text-white"
+                        >
+                          Delete Post <MdDelete className="ml-1" />
+                        </button>
+                      </div>
+                    ) : null}
                   </div>
                 ))
               ) : (

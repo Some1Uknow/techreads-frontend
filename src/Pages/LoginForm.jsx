@@ -40,14 +40,12 @@ export default function LoginForm() {
     }
   };
 
-  // console.log(data);
-
   if (redirect) return <Navigate to={"/blogs"} />;
 
   return (
-    <div className="w-screen h-screen flex flex-row justify-between bg-gray-200">
-      <div className="flex flex-row justify-center w-1/2 items-center">
-        <div className="flex items-center h-screen w-3/4 ">
+    <div className="w-screen h-screen flex flex-col md:flex-row justify-between bg-gray-200">
+      <div className="flex flex-col justify-center w-full md:w-1/2 items-center p-4">
+        <div className="flex items-center h-full w-full md:w-3/4">
           <AnimatePresence>
             <motion.div
               initial={{ opacity: 0, y: 50 }}
@@ -99,7 +97,7 @@ export default function LoginForm() {
                 Forgot Password?
               </Link>
               <Link
-                className=" bg-blue-400 rounded-lg p-3 text-white text-center text-sm mt-5"
+                className="bg-blue-400 rounded-lg p-3 text-white text-center text-sm mt-5"
                 to="/register"
               >
                 Don't have an account? Register here
@@ -113,7 +111,7 @@ export default function LoginForm() {
         initial={{ x: "-100vw" }}
         animate={{ x: 0 }}
         transition={{ duration: 0.5 }}
-        className="w-1/2 relative h-screen"
+        className="w-full md:w-1/2 relative h-64 md:h-screen"
       >
         <div className="absolute top-0 left-0 w-full h-full bg-black opacity-90"></div>
         <img
@@ -121,8 +119,8 @@ export default function LoginForm() {
           src="./home-bg.jpg"
           alt="Background"
         />
-        <h1 className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-8xl font-bold flex flex-row items-center">
-          <MdComputer className="mr-4 mt-2" />
+        <h1 className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-4xl md:text-8xl font-bold flex flex-row items-center">
+          <MdComputer className="mr-4 mt-2 text-5xl md:text-7xl" />
           <Link to="/">TechReads</Link>
         </h1>
       </motion.div>

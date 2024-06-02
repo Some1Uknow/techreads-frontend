@@ -13,38 +13,29 @@ export default function ProfileCard({
   const imgSrc = `${import.meta.env.VITE_BASE_URL}/${imagePath}`;
 
   return (
-    <div className="mt-6 w-1/2">
-      <div className="mx-auto border rounded-lg shadow-lg flex flex-col gap-1 items-center">
-        <div className=" flex flex-row justify-around w-full items-center p-4">
+    <div className="mt-6 w-full md:w-1/2">
+      <div className="mx-auto border rounded-lg shadow-lg flex flex-col gap-1 items-center p-2 md:p-4">
+        <div className="flex flex-col md:flex-row justify-around w-full items-center p-2 md:p-4">
           <img
             src={imgSrc}
-            className="h-36 w-36 rounded-full mt-4 object-cover"
+            alt="Profile"
+            className="h-24 w-24 md:h-36 md:w-36 rounded-full mt-2 md:mt-4 object-cover"
           />
-          <h1 className="text-5xl p-2 font-bold font-Chakra">{username}</h1>
+          <h1 className="text-3xl md:text-5xl p-2 font-bold font-Chakra">{username}</h1>
         </div>
-        <div className="w-3/4 p-4 flex flex-col gap-2">
-          <div className="mb-1 text-2xl  bg-gray-200 p-4 rounded-full text-gray-700">
-            <span className="flex flex-row items-center justify-center">
-              <MdEmail /> {email}
-            </span>
-          </div>
-          <div className="mb-1 bg-gray-200 p-4 text-2xl rounded-full text-gray-700">
-            <span className="flex flex-row items-center justify-center">
-              {" "}
-              <MdPerson /> {bio}
-            </span>
-          </div>
-          <div className="mb-1 bg-gray-200 p-4 text-2xl rounded-full text-gray-700">
-            <span className="flex flex-row items-center justify-center">
-              <MdTimer /> Member since:
-              {new Date(dateJoined).toLocaleDateString()}
-            </span>
-          </div>
-          <div className="mb-4 bg-gray-200 p-4 text-2xl rounded-full text-gray-700">
-            <span className="flex flex-row items-center justify-center">
-              <MdNumbers /> Blogs Published: {numberOfblogs}
-            </span>
-          </div>
+        <div className="w-3/4 p-2 md:p-4 flex flex-col gap-1 md:gap-2">
+          <ProfileInfoItem icon={<MdEmail />} label="Email" value={email} />
+          <ProfileInfoItem icon={<MdPerson />} label="Bio" value={bio} />
+          <ProfileInfoItem
+            icon={<MdTimer />}
+            label="Member since"
+            value={new Date(dateJoined).toLocaleDateString()}
+          />
+          <ProfileInfoItem
+            icon={<MdNumbers />}
+            label="Blogs Published"
+            value={numberOfblogs}
+          />
         </div>
       </div>
       <Link
@@ -56,6 +47,16 @@ export default function ProfileCard({
           Edit Profile
         </span>
       </Link>
+    </div>
+  );
+}
+
+function ProfileInfoItem({ icon, label, value }) {
+  return (
+    <div className="bg-gray-200 p-2 md:p-4 text-lg md:text-2xl rounded-full text-gray-700">
+      <span className="flex flex-row items-center justify-center">
+        {icon} {label}: {value}
+      </span>
     </div>
   );
 }
