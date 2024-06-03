@@ -118,9 +118,6 @@ export default function CreatePage() {
     if (res.status === 200) seteditRedirect(true);
   };
 
-  if (submitRedirect) return <Navigate to="/blogs" />;
-  if (editRedirect) return <Navigate to={`/profile/${user.id}`} />;
-
   const [showPopup, setShowPopup] = useState(false);
   const [loading, setloading] = useState(false);
 
@@ -156,6 +153,9 @@ export default function CreatePage() {
       console.error("Error enhancing content:", error);
     }
   };
+
+  if (submitRedirect) return <Navigate to="/blogs" />;
+  if (editRedirect) return <Navigate to={`/profile/${user.id}`} />;
 
   return (
     <div className="flex justify-center min-h-screen w-screen bg-zinc-700 text-white">
