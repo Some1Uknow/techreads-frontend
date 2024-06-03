@@ -118,7 +118,7 @@ export default function CreatePage() {
     if (res.status === 200) seteditRedirect(true);
   };
 
-  if (submitRedirect) return <Navigate to="/" />;
+  if (submitRedirect) return <Navigate to="/blogs" />;
   if (editRedirect) return <Navigate to={`/profile/${user.id}`} />;
 
   const [showPopup, setShowPopup] = useState(false);
